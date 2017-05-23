@@ -1,2 +1,5 @@
-React Hot Shell
-===============
+Mailer
+======
+
+A prototyping tool for HTML emails.
+-----------------------------------

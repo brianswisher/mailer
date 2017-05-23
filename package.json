@@ -1,5 +1,5 @@
 {
-  "name": "react-hot-shell",
+  "name": "mailer",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/brianswisher/react-hot-shell.git"
+    "url": "https://github.com/brianswisher/mailer.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/brianswisher/react-hot-shell/issues"
+    "url": "https://github.com/brianswisher/mailer/issues"
   },
-  "homepage": "https://github.com/brianswisher/react-hot-shell",
+  "homepage": "https://github.com/brianswisher/mailer",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.2",
@@ -29,12 +29,14 @@
     "react-hot-loader": "^1.3.1",
     "serve-favicon": "^2.4.2",
     "standard": "^10.0.2",
+    "standard-react": "^4.0.0",
     "webpack": "^2.4.1",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-hot-middleware": "^2.18.0"
   },
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-router-dom": "^4.1.1"
   }
 }
