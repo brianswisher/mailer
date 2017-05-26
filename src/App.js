@@ -1,63 +1,85 @@
 import React, { Component } from 'react'
-import { HashRouter as Router, Link, Route } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { HashRouter as Router, Route } from 'react-router-dom'
 
-const Gist = ({ match }) => ( // eslint-disable-line
-  <div>
-    {match.params.gistId}
-  </div>
-)
+class Row extends Component {
+  render () {
+    return (
+      <table cellPadding='0' cellSpacing='0' width='100%'>
+        <tbody><tr>{this.props.children}</tr></tbody>
+      </table>
+    )
+  }
+}
 
-const GistDeets = ({ gist }) => ( // eslint-disable-line
-  <div>
-    {gist.description}
-  </div>
-)
+Row.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element
+  ])
+}
 
 export default class App extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      gists: null
-    }
-  }
-
-  componentDidMount () {
-    window.fetch('https://api.github.com/gists')
-      .then(res => res.json())
-      .then(gists => {
-        this.setState({ gists })
-      })
-  }
-
   render () {
-    const { gists } = this.state
+    const colors = {}
+
+    colors.blueDark = '#166899'
+    colors.grayDark = '#999999'
+    colors.grayDarkest = '#333333'
+    colors.grayMedium = '#EDEDED'
+    colors.orange = '#FA8D62'
+    colors.teal = '#14AA8D'
+    colors.white = '#FFFFFF'
+
+    const styles = {}
+
+    styles.base = {
+      borderCollapse: 'collapse',
+      boxSizing: 'border-box',
+      fontFamily: 'sans-serif',
+      margin: 0,
+      padding: 0,
+      textAlign: 'center',
+      textTransform: 'none'
+    }
+    styles.rootContainer = Object.assign({}, styles.base, {
+      backgroundColor: colors.grayMedium,
+      padding: 20
+    })
 
     const home = () => (
-      <h1>Hello, world.</h1>
+      <div>
+        <Row>
+          <td width='33%'>
+            A
+          </td>
+          <td width='33%'>
+            B
+          </td>
+          <td width='33%'>
+            C
+          </td>
+        </Row>
+        <Row>
+          <td width='33%'>
+            1
+          </td>
+          <td width='33%'>
+            3
+          </td>
+        </Row>
+        <Row>
+          <td width='33%'>
+            AA
+          </td>
+        </Row>
+      </div>
     )
-
-    const gistDeets = ({ match }) => (<GistDeets gist={gists.find(g => g.id === match.params.gistId)}>2</GistDeets>)
 
     return (
       <Router>
-        <div>
-          <div>
-            <Route exact path='/' render={home} />
-            {gists && (
-              <Route path='/g/:gistId' render={gistDeets} />
-            )}
-            <Route path='/g/:gistId' component={Gist} />
-          </div>
-          {gists ? (
-            gists.map((gist, key) => (
-              <Link key={key} to={`/g/${gist.id}`}>
-                <p>{gist.description }} '[no description]'}</p>
-              </Link>
-            ))
-          ) : (
-            <div>Loading...</div>
-          )}
+        <div style={styles.rootContainer}>
+          <Route exact path='/' render={home} />
         </div>
       </Router>
     )
